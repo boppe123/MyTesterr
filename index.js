@@ -57,7 +57,7 @@ function callThingApiON () {
         //let response = JSON.parse(body);
         //let last = response['field1'];
         // Create response
-        let output = 'Turned on the lamp';
+        let output = 'The state is now on';
 
         // Resolve the promise with the output text
         console.log(output);
@@ -77,7 +77,7 @@ function callThingApiOFF () {
     //let path = '/update?api_key=116UAXMQP1O8EYZ3&field1=0';
     // Make the HTTP request
 	
-    https.get('https://api.thingspeak.com/update?api_key=116UAXMQP1O8EYZ3&field1=0', (res) => {
+    https.get('https://api.thingspeak.com/update?api_key=TOVVVTT2PA4I9HB5&field1=0', (res) => {
       let body = ''; // var to store the response chunks
       res.on('data', (d) => { body += d; }); // store each response chunk
       res.on('end', () => {
@@ -85,7 +85,7 @@ function callThingApiOFF () {
         //let response = JSON.parse(body);
         //let last = response['field1'];
         // Create response
-        let output = 'Turned off the lamp';
+        let output = 'The state is now off';
 
         // Resolve the promise with the output text
         console.log(output);
