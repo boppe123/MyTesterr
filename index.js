@@ -16,7 +16,7 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post("/webhook", function(req, res) {
+restService.post("/webhooktest", function(req, res) {
 
  let Unit = req.body.queryResult.parameters['Unit']; // take out the Unit, lamp e.g.
  let state = req.body.queryResult.parameters['state']; // take out the the state, on or off
@@ -49,7 +49,7 @@ function callThingApiON () {
     //let path = '/update?api_key=116UAXMQP1O8EYZ3&field1=1';
     // Make the HTTP request
 	
-    https.get('https://api.thingspeak.com/update?api_key=TOVVVTT2PA4I9HB5&field1=0', (res) => {
+    https.get('https://api.thingspeak.com/update?api_key=TOVVVTT2PA4I9HB5&field1=1', (res) => {
       let body = ''; // var to store the response chunks
       res.on('data', (d) => { body += d; }); // store each response chunk
       res.on('end', () => {
