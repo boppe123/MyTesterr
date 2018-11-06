@@ -23,11 +23,25 @@ restService.post("/webhooktest", function(req, res) {
  let cmd = req.body.queryResult.parameters['cmd'];
 	
 	if (Unit == 'lamp') {
-			   callThingApi().then((output) = currentstate/*> {
-    res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
-  }).catch(() => {
-    res.json({ 'fulfillmentText': 'something is wrong' });
-  });*/
+    https.get('https://api.thingspeak.com/channels/592740/feeds.json?results=2', (res) => {
+      let body = ''; // var to store the response chunks
+      res.on('data', (d) => { body += d; }); // store each response chunk
+      res.on('end', () => {
+        // After all the data has been received parse the JSON for desired data
+        let response = JSON.parse(body);
+        let currentstate = response.feeds[0].field1;
+        // Create response
+        let output = currentstate;
+
+        // Resolve the promise with the output text
+        console.log(output);
+        resolve(output);
+      });
+      res.on('error', (error) => {
+        console.log('Error calling API')
+        reject();
+      });
+    });
   if (currentstate == '1' && state =='on'){
   return 'The lamp is already on';
   }
