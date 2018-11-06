@@ -31,7 +31,7 @@ restService.post("/webhooktest", function(req, res) {
 	Http.onreadystatechange=(e)=>{
 	console.log(Http.responseText)
 	var obj = JSON.parse(Http.responseText);
-	let temp = response.feeds[0].field1;
+	var temp = response.feeds[0].field1;
 }
 		
 		
