@@ -42,20 +42,20 @@ restService.post("/webhooktest", function(req, res) {
         reject();
       });
     });
-  if (currentstate == '1' && state =='on'){
+  if (output == '1' && state =='on'){
   return 'The lamp is already on';
   }
-  if(currentstate == '0' && state =='off'){
+  if(output == '0' && state =='off'){
 	  return 'The lamp is already off';
   }
-  if (currentstate == '0' && state == 'on'){
+  if (output == '0' && state == 'on'){
 	  	 callThingApiON().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
   }
-  if(currentstate == '1' && state == 'off'){
+  if(output == '1' && state == 'off'){
 	  	callThingApiOFF().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
