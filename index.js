@@ -117,8 +117,15 @@ function callThingApiON () {
         //let response = JSON.parse(body);
         //let last = response['field1'];
         // Create response
-        let output = 'The lamp is now on';
+		
 
+		let state = req.body.queryResult.parameters['state']; // take out the the state, on or off
+		if (state == 'on' && body =='1'){
+			let output = 'The lamp is already on';
+		}
+			else{
+        let output = 'The lamp is now on';
+		}
         // Resolve the promise with the output text
         console.log(output);
         resolve(output);
