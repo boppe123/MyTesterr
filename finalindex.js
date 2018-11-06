@@ -23,21 +23,6 @@ restService.post("/webhooktest", function(req, res) {
  let cmd = req.body.queryResult.parameters['cmd'];
 	
 	if (Unit == 'lamp') {
-		
-		const Http = new XMLHttpRequest();
-	const url='https://api.thingspeak.com/channels/592740/feeds.json?results=2';
-	Http.open("GET", url);
-	Http.send();
-	Http.onreadystatechange=(e)=>{
-	console.log(Http.responseText)
-	var obj = JSON.parse(Http.responseText);
-	var temp = response.feeds[0].field1;
-}
-		
-		
-		
-	/*	
-    return new Promise((resolve, reject) => {
 	
     https.get('https://api.thingspeak.com/channels/592740/feeds.json?results=2', (res) => {
       let body = ''; // var to store the response chunks
@@ -45,20 +30,16 @@ restService.post("/webhooktest", function(req, res) {
       res.on('end', () => {
         // After all the data has been received parse the JSON for desired data
         let response = JSON.parse(body);
-        let temp = response.feeds[0].field1;
+        var temp = response.feeds[0].field1;
         // Create response
         let output = temp;
-
-        // Resolve the promise with the output text
-        console.log(output);
-        resolve(output);
       });
       res.on('error', (error) => {
         console.log('Error calling API')
         reject();
       });
     });
-  );*/
+  
 	
   if (temp == '1' && state =='on'){
   return 'The lamp is already on';
@@ -88,6 +69,7 @@ restService.post("/webhooktest", function(req, res) {
   });
  }
 	
+	}
 	}
 });
  /*
