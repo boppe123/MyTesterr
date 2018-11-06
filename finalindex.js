@@ -23,6 +23,20 @@ restService.post("/webhooktest", function(req, res) {
  let cmd = req.body.queryResult.parameters['cmd'];
 	
 	if (Unit == 'lamp') {
+		
+		const Http = new XMLHttpRequest();
+	const url='https://jsonplaceholder.typicode.com/posts';
+	Http.open("GET", url);
+	Http.send();
+	Http.onreadystatechange=(e)=>{
+	console.log(Http.responseText)
+	var obj = JSON.parse(Http.responseText);
+	let temp = response.feeds[0].field1;
+}
+		
+		
+		
+	/*	
     return new Promise((resolve, reject) => {
 	
     https.get('https://api.thingspeak.com/channels/592740/feeds.json?results=2', (res) => {
@@ -44,7 +58,7 @@ restService.post("/webhooktest", function(req, res) {
         reject();
       });
     });
-  );
+  );*/
 	
   if (temp == '1' && state =='on'){
   return 'The lamp is already on';
@@ -73,7 +87,7 @@ restService.post("/webhooktest", function(req, res) {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
  }
-	}
+	
 	}
 });
  /*
