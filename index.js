@@ -18,17 +18,17 @@ restService.use(bodyParser.json());
 
 restService.post("/webhooktest", function(req, res) {
 
- let unit = req.body.queryResult.parameters['unit']; // take out the Unit, lamp e.g.
+ let Unit = req.body.queryResult.parameters['Unit']; // take out the Unit, lamp e.g.
  let state = req.body.queryResult.parameters['state']; // take out the the state, on or off
  let cmd = req.body.queryResult.parameters['cmd'];
- if (unit == 'lamp'){
+ if (Unit == 'lamp'){
 	   callThingApi().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
  }
- if (unit == 'lamp' && state == 'on' && cmd == 'turn'){
+ if (Unit == 'lamp' && state == 'on' && cmd == 'turn'){
 	 callThingApiON().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
