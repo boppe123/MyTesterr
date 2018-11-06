@@ -21,24 +21,23 @@ restService.post("/webhooktest", function(req, res) {
  let Unit = req.body.queryResult.parameters['Unit']; // take out the Unit, lamp e.g.
  let state = req.body.queryResult.parameters['state']; // take out the the state, on or off
  let cmd = req.body.queryResult.parameters['cmd'];
-	
+ var temp;
 	if (Unit == 'lamp') {
 	 callThingApi().then((output) => {
-    res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
+		 temp = output;
+    //res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
-    res.json({ 'fulfillmentText': 'something is wrong' });
+//    res.json({ 'fulfillmentText': 'something is wrong' });
   });
-        let response = JSON.parse(output);
-        let temp = response.feeds[0].field1;
 	
   if (temp == '1' && state =='on'){
-  return 'The lamp is already on';
+  res.json({ 'fulfillmentText': 'The lamp is already on' });
   }
   if(temp == '0' && state =='off'){
-	  return 'The lamp is already off';
+	  res.json({ 'fulfillmentText': 'The lamp is already off' });
   }
   if (temp == '0' && state == 'on'){
-	  	 callThingApiON().then((output) => {
+	  	 callThingApiON().then((output) => { 
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
     res.json({ 'fulfillmentText': 'something is wrong' });
@@ -130,9 +129,9 @@ function callThingApi () {
         // Create response
         let output = temp;
 
-        // Resolve the promise with the output text
-        //console.log(output);
-        //resolve(output);
+         //Resolve the promise with the output text
+        console.log(output);
+        resolve(output);
       });
       res.on('error', (error) => {
         console.log('Error calling API')
