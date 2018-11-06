@@ -23,25 +23,25 @@ restService.post("/webhooktest", function(req, res) {
  let cmd = req.body.queryResult.parameters['cmd'];
 	
 	if (Unit == 'lamp') {
-			   callThingApi().then((output) => {
+			   callThingApi().then((output) = currentstate/*> {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
     res.json({ 'fulfillmentText': 'something is wrong' });
-  });
-  if (output == '1' && state =='on'){
+  });*/
+  if (currentstate == '1' && state =='on'){
   return 'The lamp is already on';
   }
-  if(output == '0' && state =='off'){
+  if(currentstate == '0' && state =='off'){
 	  return 'The lamp is already off';
   }
-  if (output == '0' && state == 'on'){
+  if (currentstate == '0' && state == 'on'){
 	  	 callThingApiON().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
   }
-  if(output == '1' && state == 'off'){
+  if(currentstate == '1' && state == 'off'){
 	  	callThingApiOFF().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
