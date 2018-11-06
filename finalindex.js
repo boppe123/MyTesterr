@@ -25,7 +25,7 @@ restService.post("/webhooktest", function(req, res) {
 	if (Unit == 'lamp') {
 		
 		const Http = new XMLHttpRequest();
-	const url='https://jsonplaceholder.typicode.com/posts';
+	const url='https://api.thingspeak.com/channels/592740/feeds.json?results=2';
 	Http.open("GET", url);
 	Http.send();
 	Http.onreadystatechange=(e)=>{
