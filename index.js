@@ -28,15 +28,13 @@ restService.post("/webhooktest", function(req, res) {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
  }
- 
  if (unit == 'lamp' && state == 'on' && cmd == 'turn'){
 	 callThingApiON().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
- }
- if (unit == 'lamp' && state == 'off' && cmd == 'turn'){
+ }else{
 	callThingApiOFF().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
