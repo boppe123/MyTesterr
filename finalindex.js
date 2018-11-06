@@ -23,15 +23,17 @@ restService.post("/webhooktest", function(req, res) {
  let cmd = req.body.queryResult.parameters['cmd'];
 	
 	if (Unit == 'lamp') {
+    return new Promise((resolve, reject) => {
+	
     https.get('https://api.thingspeak.com/channels/592740/feeds.json?results=2', (res) => {
       let body = ''; // var to store the response chunks
       res.on('data', (d) => { body += d; }); // store each response chunk
       res.on('end', () => {
         // After all the data has been received parse the JSON for desired data
         let response = JSON.parse(body);
-        let currentstate = response.feeds[0].field1;
+        let temp = response.feeds[0].field1;
         // Create response
-        let output = currentstate;
+        let output = temp;
 
         // Resolve the promise with the output text
         console.log(output);
@@ -42,20 +44,22 @@ restService.post("/webhooktest", function(req, res) {
         reject();
       });
     });
-  if (output == '1' && state =='on'){
+  );
+	
+  if (temp == '1' && state =='on'){
   return 'The lamp is already on';
   }
-  if(output == '0' && state =='off'){
+  if(temp == '0' && state =='off'){
 	  return 'The lamp is already off';
   }
-  if (output == '0' && state == 'on'){
+  if (temp == '0' && state == 'on'){
 	  	 callThingApiON().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
   }
-  if(output == '1' && state == 'off'){
+  if(temp == '1' && state == 'off'){
 	  	callThingApiOFF().then((output) => {
     res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
   }).catch(() => {
@@ -69,6 +73,7 @@ restService.post("/webhooktest", function(req, res) {
     res.json({ 'fulfillmentText': 'something is wrong' });
   });
  }
+	}
 	}
 });
  /*
